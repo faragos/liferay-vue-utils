@@ -8,13 +8,18 @@ module.exports = function(folderName) {
 
     $('*[data-portlet-type="vue"]').each(function() {
         vueComponents.push($(this).attr('id'))
+        $(this).next('script').remove()
     });
 
+    $('[rel="manifest"]').attr('href', '/o/parl-dw-theme/images/favicon/manifest.json');
     var text = $.html();
-
+    var protocol='http';
+    var escapedSlashes = ':\\/\\/';
+    var host='10.100.0.118';
+    text = text.replace(protocol + escapedSlashes + host, '');
 
     var json = JSON.stringify(vueComponents);
     fs.writeFileSync(folderName + 'vueComponents.json', json, 'utf8');
-    fs.writeFileSync(filename, $.html(), 'utf8');
+    fs.writeFileSync(filename, text, 'utf8');
 }
 
