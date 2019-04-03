@@ -1,0 +1,19 @@
+{
+  "name": "liferay-vue-utils",
+  "version": "0.0.1",
+  "description": "Parses a Liferay Page and returns all Ids",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "puppeteer": "^1.14.0",
+    "rimraf": "^2.6.3",
+    "website-scraper": "^4.0.0",
+    "ws": "^6.2.1"
+  },
+  "bin": "./bin/cli.js",
+  "author": "Marco Endres",
+  "license": "ISC"
+}
