@@ -1,30 +1,23 @@
 var fs = require('fs');
-var rimraf = require("rimraf");
-const puppeteer = require('puppeteer');
 var preparePage = require("./preparePage")
-var path = require('path')
-const scrape = require('website-scraper');
+var request = require("request");
 
 module.exports = function (url, basePath) {
     const folderName = basePath + '/public/';
 
     const options = {
-        urls: [url],
+        url: url,
         directory: folderName
     }
 
+    if (!fs.existsSync(folderName)){
+      fs.mkdirSync(folderName);
+    }
+
     try {
-        if (fs.existsSync(folderName)){
-            rimraf(folderName, function () {
-                downloadPage(options).then(() => {
-                    preparePage(folderName);
-                })
-            })
-        } else {
-            downloadPage(options).then(() => {
-                preparePage(folderName);
-            })
-        }
+      downloadPage(options).then(() => {
+
+      })
     } catch (err) {
         console.error(err)
     }
@@ -39,8 +32,13 @@ module.exports.getVueElements = function() {
 }
 
 async function downloadPage (options) {
-    const result = await scrape(options);
+  request({
+    uri: options.url,
+  }, function(error, response, body) {
+    preparePage(options, body);
+  });
 }
+
 
 
 
