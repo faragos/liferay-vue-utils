@@ -1,10 +1,10 @@
 const cheerio = require('cheerio')
-var fs = require('fs');
+let fs = require('fs');
 
 module.exports = function(options, body) {
-    var filename = options.directory + 'index.html';
+    let filename = options.directory + 'index.html';
     const $ = cheerio.load(body);
-    var vueComponents = [];
+    let vueComponents = [];
 
     $('*[data-portlet-type="vue"]').each(function() {
         let scriptContent = $(this).next('script').html()
