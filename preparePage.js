@@ -7,26 +7,40 @@ module.exports = function(options, body) {
     var vueComponents = [];
 
     $('*[data-portlet-type="vue"]').each(function() {
-        var scriptContent = $(this).next('script').html()
-        var initText = 'new Vue('
-        var vueContentStart = scriptContent.indexOf(initText);
-        var vuePart;
-        if(vueContentStart > 0) {
-            var vueContentEnd = findClosingBracketMatchIndex(scriptContent,vueContentStart + initText.length - 1)
-            if (vueContentEnd > 0) {
-                vuePart = scriptContent.substring(vueContentStart, vueContentEnd + 1)
-            }
-        }
+        let scriptContent = $(this).next('script').html()
 
-        var component = new VueComponent($(this).attr('id'), vuePart)
+        let vuePart = findVuePart(scriptContent)
+        let component = new VueComponent($(this).attr('id'), vuePart)
         vueComponents.push(component)
     });
 
-    var text = $.html();
+    let text = $.html();
+
+    $('script').each(function() {
+        let scriptContent = $(this).html()
+
+        let vuePart = findVuePart(scriptContent)
+        if (vuePart) {
+            text = text.replace(vuePart, '')
+        }
+    });
+
 
     var json = JSON.stringify(vueComponents);
     fs.writeFileSync(options.directory + 'vueComponents.json', json, 'utf8');
     fs.writeFileSync(filename, text, 'utf8');
+}
+
+function findVuePart(content) {
+    let initText = 'new Vue('
+    let vueContentStart = content.indexOf(initText);
+    if (vueContentStart > 0) {
+        let vueContentEnd = findClosingBracketMatchIndex(content,vueContentStart + initText.length - 1)
+        if (vueContentEnd > 0) {
+            return content.substring(vueContentStart, vueContentEnd + 1)
+        }
+    }
+    return false
 }
 
 function findClosingBracketMatchIndex(str, pos) {
