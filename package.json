@@ -14,5 +14,5 @@
   },
   "bin": "./bin/cli.js",
   "author": "Marco Endres",
-  "license": "ISC"
+  "license": "MIT"
 }

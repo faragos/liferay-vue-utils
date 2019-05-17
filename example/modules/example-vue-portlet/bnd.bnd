@@ -1,0 +1,5 @@
+Bundle-Name: Example Vue Portlet
+Bundle-SymbolicName: com.example.vue
+Bundle-Version: 1.0.0
+Export-Package: com.example.vue.constants
+Web-ContextPath: /example-vue-portlet
