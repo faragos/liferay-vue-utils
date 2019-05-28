@@ -2,20 +2,31 @@ var fs = require('fs');
 var preparePage = require("./preparePage")
 var request = require("request");
 
-module.exports = function (url, basePath) {
+module.exports = function (configPath, basePath) {
     const folderName = basePath + '/public/';
 
-    const options = {
-        url: url,
-        directory: folderName
+    if(!configPath) {
+      configPath = 'liferay.vue.config.js'
     }
+
+    let fullConfigPath = basePath + '/' + configPath
+
+    if(!fs.existsSync(fullConfigPath)) {
+      console.error(configPath + ' not Found')
+      return
+    }
+
+    let config = require(fullConfigPath);
+
+    config.url = config.protocol + '://' + config.host + ':' + config.originPort
+    config.directory = folderName
 
     if (!fs.existsSync(folderName)){
       fs.mkdirSync(folderName);
     }
 
     try {
-      downloadPage(options).then(() => {
+      downloadPage(config).then(() => {
 
       })
     } catch (err) {

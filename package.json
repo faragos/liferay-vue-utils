@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "app-root-path": "^2.2.1",
     "cheerio": "^1.0.0-rc.2",
     "request": "^2.88.0",
+    "sync-request": "^6.1.0",
     "ws": "^6.2.1"
   },
   "bin": "./bin/cli.js",
