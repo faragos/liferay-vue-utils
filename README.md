@@ -1,13 +1,9 @@
-<a href="https://www.buymeacoffee.com/faragos" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
-
+# Idea
 
 The idea behind this tool is that you can download a Liferay page with Vue portlets. \
 It prepares a Liferay page for webpack.
 
 ``npx liferay-vue-utils http://localhost:8080``
-
-# Example
-https://github.com/faragos/liferay-vue-utils-example
 
 # What does it?
 It generates a **public** folder with the following content:
@@ -53,7 +49,14 @@ The mains advantages are:
 module.exports = {
   protocol: 'http',
   host: '[URL]',
-  port: 3000
+  originPort: 80,
+  port: 3000,
+  loadInline: {
+    selector: '[src*=\'example.js\']'
+  },
+  remove: {
+    selector: ''
+  }
 }
 ````
 
