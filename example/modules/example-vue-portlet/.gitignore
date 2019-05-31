@@ -1,6 +1,0 @@
-.gradle/
-build/
-node_modules/
-target/
-public/
-liferay.vue.config.js

@@ -61,7 +61,10 @@ module.exports = {
 ````
 
 ## How to update your index.html
-``npx liferay-vue-utils http://localhost:8080``
+``npx liferay-vue-utils``
+
+or
+``npx liferay-vue-utils liferay.vue.config.js``
 
 
 

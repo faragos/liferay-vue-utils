@@ -1,6 +1,6 @@
 {
   "name": "liferay-vue-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Parses a Liferay Page and returns all Vue Ids which have the data-portlet-type='vue' annotiation",
   "main": "index.js",
   "scripts": {
