@@ -45,7 +45,15 @@ function loadInline ($, options) {
 
 function removeParts ($, options) {
     if(options.remove && options.remove.selector) {
-        $(options.selector).remove();
+        console.log("Following tags got removed:")
+        $(options.remove.selector).each(function(i, elm) {
+            console.log((i + 1) + ". line")
+            console.log("----------------------")
+            console.log($.html(this).trim())
+            console.log("----------------------\n")
+        });
+
+        $(options.remove.selector).remove();
     }
 }
 

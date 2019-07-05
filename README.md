@@ -3,7 +3,11 @@
 The idea behind this tool is that you can download a Liferay page with Vue portlets. \
 It prepares a Liferay page for webpack.
 
-``npx liferay-vue-utils http://localhost:8080``
+``npx liferay-vue-utils``
+
+or
+
+``npx liferay-vue-utils liferay.vue.config.js``
 
 # What does it?
 It generates a **public** folder with the following content:
@@ -55,7 +59,7 @@ module.exports = {
     selector: '[src*=\'example.js\']'
   },
   remove: {
-    selector: ''
+    selector: '*[data-portlet-type="vue"] + script'
   }
 }
 ````
@@ -64,9 +68,8 @@ module.exports = {
 ``npx liferay-vue-utils``
 
 or
+
 ``npx liferay-vue-utils liferay.vue.config.js``
-
-
 
 ## Problems
 *I always get: ``Path must be a string. Received undefined``* -> Ignore it
